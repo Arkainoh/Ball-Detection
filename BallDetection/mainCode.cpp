@@ -25,19 +25,19 @@ int main() {
 		
 		/*
 		Logics
-		1. »¡°£»ö °èÅëÀÇ »ö±ò (±×·ìÇÎ) -> Ã£°í ½Í´Ù.
+		1. ë¹¨ê°„ìƒ‰ ê³„í†µì˜ ìƒ‰ê¹” (ê·¸ë£¹í•‘) -> ì°¾ê³  ì‹¶ë‹¤.
 		2. R G B
-			=> ÀÌ°Å ÇØÁÖ´Â °Å R> 80 && G B < 50 ³ª¸ÓÁö ¾ø¾ÖÁà
-		3. Mat parameter RGB °ªµéÀÌ
-		4. Ã³¸®µÈ ÀÌ¹ÌÁö¿¡¼­ ÇÏ¾á»ö ºÎºĞÀÇ ÁÂÇ¥°ªµéÀ» Á¸³ª ¸ğ¾Æ ÀÚ·á±¸Á¶¿¡ ³Ö¾î
-		5. °æ°è¼±À» Ã£À½
-		6. µî°í¼±À» Ã£¾ÆÁØ´Ù -> °æ°è¼± ÀÌ°Ô º¤ÅÍ¿¡ ÀúÀåµÅ ±Ùµ¥? º¤ÅÍ¿¡ ¾î¶»°Ô ÀúÀåµÇ³Ä
-		º¤ÅÍ¿¡ ÀúÀåÀÌ µÆ¾î -> ±¸Á¶´Â ¸ğ¸§
-		7. ±¸Á¶¸¦ ¸ğ¸£¸é ¿©±â À§¿¡ ÆäÀÎÆ®¸¦ Ä¥ÇØ¾ßÇÏ´Âµ¥ ¾î¶»°Ô Ä¥ÇÔ? Point <- <Point>
-		Contour¿¡ ÀúÀåµÅÀÖ °æ°è¼±ÀÌ ¾Æ´Ï¶ó ÇÏ¾á»ö ºÎºĞÀÇ 
-		°æ°è Ã£Àº´ÙÀ½ Áß½ÉÁ¡ Ã£°í
-		°æ°è¿¡ Ä¥ÇÔ
-		Áß½ÉÂï¾î ³õ radius ±×¸®¸éµÇ°Ú³×
+			=> ì´ê±° í•´ì£¼ëŠ” ê±° R> 80 && G B < 50 ë‚˜ë¨¸ì§€ ì—†ì• ì¤˜
+		3. Mat parameter RGB ê°’ë“¤ì´
+		4. ì²˜ë¦¬ëœ ì´ë¯¸ì§€ì—ì„œ í•˜ì–€ìƒ‰ ë¶€ë¶„ì˜ ì¢Œí‘œê°’ë“¤ì„ ëª¨ì•„ ìë£Œêµ¬ì¡°ì— ë„£ì–´
+		5. ê²½ê³„ì„ ì„ ì°¾ìŒ
+		6. ë“±ê³ ì„ ì„ ì°¾ì•„ì¤€ë‹¤ -> ê²½ê³„ì„  ì´ê²Œ ë²¡í„°ì— ì €ì¥ë¼ ê·¼ë°? ë²¡í„°ì— ì–´ë–»ê²Œ ì €ì¥ë˜ëƒ
+		ë²¡í„°ì— ì €ì¥ì´ ëì–´ -> êµ¬ì¡°ëŠ” ëª¨ë¦„
+		7. êµ¬ì¡°ë¥¼ ëª¨ë¥´ë©´ ì—¬ê¸° ìœ„ì— í˜ì¸íŠ¸ë¥¼ ì¹ í•´ì•¼í•˜ëŠ”ë° ì–´ë–»ê²Œ ì¹ í•¨? Point <- <Point>
+		Contourì— ì €ì¥ë¼ìˆ ê²½ê³„ì„ ì´ ì•„ë‹ˆë¼ í•˜ì–€ìƒ‰ ë¶€ë¶„ì˜ 
+		ê²½ê³„ ì°¾ì€ë‹¤ìŒ ì¤‘ì‹¬ì  ì°¾ê³ 
+		ê²½ê³„ì— ì¹ í•¨
+		ì¤‘ì‹¬ì°ì–´ ë†“ radius ê·¸ë¦¬ë©´ë˜ê² ë„¤
 		*/
 
 		cvtColor(img, img_hsv, CV_BGR2HSV);
@@ -53,12 +53,12 @@ int main() {
 		vector<vector<Point>> contours;
 		vector<Vec4i> hierarchy;
 
-		// Canny·Î edgeµéÀ» »Ì¾Æ³½´Ù. (Thresh ¹üÀ§ ¾ÈÀÇ °ÍµéÀ» edge·Î ¹Ş¾ÆµéÀÎ´Ù)
+		// Cannyë¡œ edgeë“¤ì„ ë½‘ì•„ë‚¸ë‹¤. (Thresh ë²”ìœ„ ì•ˆì˜ ê²ƒë“¤ì„ edgeë¡œ ë°›ì•„ë“¤ì¸ë‹¤)
 		Canny(red, canny_output, THRESH, THRESH * 2, 3);
-		//THRESHÀÇ °ª down threshold, upper threshold
-		//Gradient (3 * 3 Çà·Ä »ç¿ëÇØ¼­ ÇÊÅÍ¸µ -> x¿Í yÀÇ ´ëºñ¸¦ ½É°¢ÇÏ°Ô ÇØ¼­ edge¸¦ ±¸ÇÏ´Â ¹æ¹ı)
+		//THRESHì˜ ê°’ down threshold, upper threshold
+		//Gradient (3 * 3 í–‰ë ¬ ì‚¬ìš©í•´ì„œ í•„í„°ë§ -> xì™€ yì˜ ëŒ€ë¹„ë¥¼ ì‹¬ê°í•˜ê²Œ í•´ì„œ edgeë¥¼ êµ¬í•˜ëŠ” ë°©ë²•)
 		
-		// Canny·ÎºÎÅÍ »Ì¾Æ³½ edgeµéÀ» contour·Î º¯È¯ÇÑ´Ù.
+		// Cannyë¡œë¶€í„° ë½‘ì•„ë‚¸ edgeë“¤ì„ contourë¡œ ë³€í™˜í•œë‹¤.
 		findContours(canny_output, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
 		//printf("(%d, %d)\n",contours[0][0].x,contours[0][0].y);
 		
@@ -79,8 +79,8 @@ int main() {
 				int x = contours[i][j].x;
 				int y = contours[i][j].y;
 
-				//prev center¿Í ºñ±³ÇØ¼­ °°Àº ºĞ·ù¸é Valid!
-				if ( prev_center.x != 0 && prev_center.y != 0 ) { //Ã³À½ÀÌ ¾Æ´Ñ °æ¿ì
+				//prev centerì™€ ë¹„êµí•´ì„œ ê°™ì€ ë¶„ë¥˜ë©´ Valid!
+				if ( prev_center.x != 0 && prev_center.y != 0 ) { //ì²˜ìŒì´ ì•„ë‹Œ ê²½ìš°
 							
 					double distance =  std::sqrt( (prev_center.x-x)*(prev_center.x-x) + (prev_center.y-y)*(prev_center.y-y) );
 					//printf("(%d, %d) prev_center\n", prev_center.x, prev_center.y);
@@ -94,7 +94,7 @@ int main() {
 				}
 
 				//min ~ max
-				if(validPoint) { //valid pointÀÎ °æ¿ì¿¡¸¸ ÇÕ»ê
+				if(validPoint) { //valid pointì¸ ê²½ìš°ì—ë§Œ í•©ì‚°
 					if( i == 0 && j == 0 ) {
 						//init min & max
 						min_x = contours[i][j].x;
@@ -138,12 +138,12 @@ int main() {
 
 	}//while
 	/*
-	±×¸®´Â
+	ê·¸ë¦¬ëŠ”
 	circle(img, center, 3, Scalar(0, 255, 0), -1, 8, 0);
-	¸¶Áö¸·¿¡¼­ ¼¼¹øÂ°´Â thickness¸¦ ¶æÇÏ´Âµ¥, À½¼öÀÌ¸é Ã¤¿öÁø ¿øÀ» ±×¸², 8Àº linetypeÀÌ´Ù. ½Ç¼±À» ÀÇ¹ÌÇÏ´Â µî, ¸¶Áö¸· 0Àº fraction bits
-	circle(img, center, ¹İÁö¸§, Scalar(0, 255, 0), 3, 8, 0);
+	ë§ˆì§€ë§‰ì—ì„œ ì„¸ë²ˆì§¸ëŠ” thicknessë¥¼ ëœ»í•˜ëŠ”ë°, ìŒìˆ˜ì´ë©´ ì±„ì›Œì§„ ì›ì„ ê·¸ë¦¼, 8ì€ linetypeì´ë‹¤. ì‹¤ì„ ì„ ì˜ë¯¸í•˜ëŠ” ë“±, ë§ˆì§€ë§‰ 0ì€ fraction bits
+	circle(img, center, ë°˜ì§€ë¦„, Scalar(0, 255, 0), 3, 8, 0);
 	*/
-	//Áß½ÉÁ¡ x,y°¡ ÀÖ´Ù°í ÇÒ ¶§
+	//ì¤‘ì‹¬ì  x,yê°€ ìˆë‹¤ê³  í•  ë•Œ
 
 	cv::destroyAllWindows();
 	vc.release();
